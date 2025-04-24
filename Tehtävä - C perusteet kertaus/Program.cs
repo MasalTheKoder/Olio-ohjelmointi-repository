@@ -70,7 +70,6 @@ namespace Tehtävä___C_perusteet_kertaus
                     Console.WriteLine("Ritari voitti örkin taistelussa. Yippee!");
                 }
 
-
             }
         }
     }
