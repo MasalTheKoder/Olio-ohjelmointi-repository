@@ -4,17 +4,27 @@ namespace RitariPeli
 {
     class Program
     {
+        static Knight player;
+        static Shop shop;
+
         static void Main(string[] args)
         {
+            Console.Write("Mikä on nimesi? ");
+            string name = Console.ReadLine();
+            player = new Knight(name);
+            shop = new Shop();
+
             bool isRunning = true;
 
             while (isRunning)
             {
                 Console.Clear();
-                Console.WriteLine("=== RITARI PELI ===");
-                Console.WriteLine("1. Aloita taistelu.");
-                Console.WriteLine("2. Käy kaupassa.");
-                Console.WriteLine("3. Lopeta peli");
+                Console.WriteLine("=== RITARIN SEIKKAILU ===");
+                player.ShowStats();
+                Console.WriteLine("\nMitä haluat tehdä?");
+                Console.WriteLine("1. Mene taisteluun");
+                Console.WriteLine("2. Vieraile kaupassa");
+                Console.WriteLine("3. Poistu pelistä");
                 Console.Write("Valintasi: ");
 
                 string input = Console.ReadLine();
@@ -29,9 +39,10 @@ namespace RitariPeli
                         break;
                     case "3":
                         isRunning = false;
+                        Console.WriteLine("Kiitos pelaamisesta!");
                         break;
                     default:
-                        Console.WriteLine("Virheellinen valinta");
+                        Console.WriteLine("Virheellinen valinta. Paina Enter jatkaaksesi.");
                         Console.ReadLine();
                         break;
                 }
@@ -41,17 +52,14 @@ namespace RitariPeli
         static void EnterBattle()
         {
             Console.Clear();
-            Console.WriteLine("Taistelu alkaa!");
-            Console.WriteLine("Paina Enter palataksesi menuun.");
+            Console.WriteLine("Aloitetaan taistelu... (tähän tulee taistelulogiikka myöhemmin)");
+            Console.WriteLine("Paina Enter palataksesi valikkoon.");
             Console.ReadLine();
         }
 
         static void VisitShop()
         {
-            Console.Clear();
-            Console.WriteLine("Tervetuloa Kauppaan!");
-            Console.WriteLine("Paina Enter palataksesi menuun");
-            Console.ReadLine();
+            shop.OpenShop(player);
         }
     }
 }
