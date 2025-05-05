@@ -15,7 +15,32 @@ namespace RitariPeli
 
         public void StartCombat()
         {
-            enemy = new Enemy("Iso Paha", 50, 10);
+            Console.Clear();
+
+            bool validChoice = false;
+            while (!validChoice)
+            {
+                Console.WriteLine("Valitse vihollinen:");
+                Console.WriteLine("1. Paha (Helppo)");
+                Console.WriteLine("2. Iso Paha (Vaikea)");
+                Console.Write("Valintasi: ");
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        enemy = new Enemy("Paha", 30, 5);
+                        validChoice = true;
+                        break;
+                    case "2":
+                        enemy = new Enemy("Iso Paha", 50, 10);
+                        validChoice = true;
+                        break;
+                    default:
+                        Console.WriteLine("Virheellinen valinta.\n");
+                        break;
+                }
+            }
 
             Console.Clear();
             Console.WriteLine("Taistelu alkaa!");
@@ -31,13 +56,13 @@ namespace RitariPeli
 
             if (player.CurrentHealth > 0)
             {
-                Console.WriteLine($"\n {player.Name} voitti taistelun!");
+                Console.WriteLine($"\n{player.Name} voitti taistelun!");
                 player.Gold += 40;
                 Console.WriteLine($"{player.Name} sai 40 kultaa palkkioksi!");
             }
             else
             {
-                Console.WriteLine($"\n {player.Name} hävisi taistelun...");
+                Console.WriteLine($"\n{player.Name} hävisi taistelun...");
             }
 
             Console.WriteLine("\nPaina Enter jatkaaksesi...");

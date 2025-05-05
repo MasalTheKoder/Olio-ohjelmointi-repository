@@ -41,7 +41,7 @@ namespace RitariPeli
                     if (item is Armor armor)
                         canBuy = knight.EquippedArmor == null || knight.EquippedArmor.Name != armor.Name;
 
-                    string availability = canBuy ? "" : " (jo varustettu)";
+                    string availability = canBuy ? "" : " (omistat tämän)";
                     Console.WriteLine($"{i + 1}. {item.Name} - {item.Price} kultaa{availability}");
                 }
 
