@@ -51,10 +51,8 @@ namespace RitariPeli
 
         static void EnterBattle()
         {
-            Console.Clear();
-            Console.WriteLine("Aloitetaan taistelu... (tähän tulee taistelulogiikka myöhemmin)");
-            Console.WriteLine("Paina Enter palataksesi valikkoon.");
-            Console.ReadLine();
+            CombatManager combat = new CombatManager(player);
+            combat.StartCombat();
         }
 
         static void VisitShop()

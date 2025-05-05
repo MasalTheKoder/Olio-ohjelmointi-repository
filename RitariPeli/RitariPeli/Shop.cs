@@ -33,13 +33,24 @@ namespace RitariPeli
                 for (int i = 0; i < itemsForSale.Count; i++)
                 {
                     Item item = itemsForSale[i];
-                    Console.WriteLine($"{i + 1}. {item.Name} - {item.Price} kultaa");
+                    bool canBuy = true;
+
+                    if (item is Weapon weapon)
+                        canBuy = knight.EquippedWeapon == null || knight.EquippedWeapon.Name != weapon.Name;
+
+                    if (item is Armor armor)
+                        canBuy = knight.EquippedArmor == null || knight.EquippedArmor.Name != armor.Name;
+
+                    string availability = canBuy ? "" : " (jo varustettu)";
+                    Console.WriteLine($"{i + 1}. {item.Name} - {item.Price} kultaa{availability}");
                 }
+
                 Console.WriteLine("0. Poistu kaupasta");
                 Console.Write("\nValitse ostettava tuote: ");
 
                 string input = Console.ReadLine();
                 int choice;
+
                 if (int.TryParse(input, out choice))
                 {
                     if (choice == 0)
@@ -52,7 +63,19 @@ namespace RitariPeli
                     {
                         Item selectedItem = itemsForSale[choice - 1];
 
-                        if (knight.Gold >= selectedItem.Price)
+                        bool alreadyOwned = false;
+
+                        if (selectedItem is Weapon selectedWeapon)
+                            alreadyOwned = knight.EquippedWeapon != null && knight.EquippedWeapon.Name == selectedWeapon.Name;
+
+                        if (selectedItem is Armor selectedArmor)
+                            alreadyOwned = knight.EquippedArmor != null && knight.EquippedArmor.Name == selectedArmor.Name;
+
+                        if (alreadyOwned)
+                        {
+                            Console.WriteLine("Sinulla on jo tämä item!");
+                        }
+                        else if (knight.Gold >= selectedItem.Price)
                         {
                             knight.Gold -= selectedItem.Price;
 
